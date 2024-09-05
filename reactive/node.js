@@ -27,31 +27,29 @@ export default class Node{
     }
 
     j_on() {
-        (function () {
-            if (this.element.hasAttribute('j-on')) {
-                const [event, method] = this.element.getAttribute('j-on').split('|');
-                //console.log(event, method);
-    
-                //ensure duplicate event listeners are not created
-                if (this['j-on-' + event]) {
-                    return;
-                } else {
-                    //define code to run when event is triggered
-                    const f = function() {
-                        eval(method);
-                    }
-    
-                    //bind f to the state object
-                    const fn = f.bind(this.reactive.state);
-    
-                    //create event listener
-                    this.element.addEventListener(event, fn);
-    
-                    //store event listener
-                    this['j-on-' + event] = fn;
+        if (this.element.hasAttribute('j-on')) {
+            const [event, method] = this.element.getAttribute('j-on').split('|');
+            //console.log(event, method);
+
+            //ensure duplicate event listeners are not created
+            if (this['j-on-' + event]) {
+                return;
+            } else {
+                //define code to run when event is triggered
+                const f = function() {
+                    eval(method);
                 }
+
+                //bind f to the state object
+                const fn = f.bind(this.reactive.state);
+
+                //create event listener
+                this.element.addEventListener(event, fn);
+
+                //store event listener
+                this['j-on-' + event] = fn;
             }
-        }).call(this);
+        }
     }
 
     j_show() {
