@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 //recursive function that traverses the DOM tree, supplying each element with a reference to the state object
 function giveReactiveRef(element, state) {
-    //creat a node for the element with access to the state object
+    //create a node for the element with access to the state object
     element._j_node = new Node(state, element);
 
     //traverse the child elements
